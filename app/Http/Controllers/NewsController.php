@@ -32,7 +32,7 @@ class NewsController extends Controller
         $new->image_url = $getImageName;
         $new->save();
 
-        return back()->with("success","New created successfully");
+        return back()->with("create","New created successfully");
     }
     public function show($id){
         $new = News::find($id);
@@ -62,13 +62,13 @@ class NewsController extends Controller
             $new->image_url = $imgName;
         }
         $new->save();
-        return to_route('news-index')->with('success',"Blog updated successfully");
+        return to_route('news-index')->with('update',"Blog updated successfully");
     }
     
     public function destroy($id){
         $new = News::where("id",$id)->first();
         Storage::delete("public/".$new->image_url);
         $new->delete();
-        return to_route('news-index')->with('success',"Blog deleted successfully");
+        return to_route('news-index')->with('delete',"Blog deleted successfully");
     }
 }

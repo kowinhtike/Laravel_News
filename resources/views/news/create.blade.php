@@ -12,9 +12,6 @@
     <div class="row">
         <div class="col-8">
             <h1>This is create form</h1>
-            @if (session()->has("success"))
-                <div class="alert alert-success">{{ session("success") }}</div>
-            @endif
             <form action="{{ route("news-store") }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
@@ -45,3 +42,15 @@
     </div>
 </div>
 @endsection
+
+@if (session()->has("create"))
+                @push("scripts")
+                <script>
+                  Swal.fire({
+                  title: "Successful!",
+                  text: "You created the new new",
+                  icon: "success"
+                });
+                </script>
+                @endpush
+            @endif

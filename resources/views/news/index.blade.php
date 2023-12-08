@@ -9,9 +9,9 @@
 @section('content')
 <div class="container">
     <div class="row">
-      @if (session()->has("success"))
+      {{-- @if (session()->has("success"))
                 <div class="alert alert-success">{{ session("success") }}</div>
-            @endif
+            @endif --}}
         @foreach ($news as $new)
         <div class="card" style="width: 18rem;">
             <img height="300px" src="{{ asset("storage"."/".$new->image_url) }}" class="card-img-top" alt="...">
@@ -24,3 +24,27 @@
     </div>
 </div>
 @endsection
+
+@if (session()->has("update"))
+                @push("scripts")
+                <script>
+                  Swal.fire({
+                  title: "Successful!",
+                  text: "You updated this post",
+                  icon: "success"
+                });
+                </script>
+                @endpush
+            @endif
+
+@if (session()->has("delete"))
+                @push("scripts")
+                <script>
+                  Swal.fire({
+                  title: "Successful!",
+                  text: "You deleted this item!",
+                  icon: "success"
+                });
+                </script>
+                @endpush
+            @endif
