@@ -9,18 +9,13 @@
 @section('content')
 <div class="container">
     <div class="row">
-      @if (session()->has("success"))
-                <div class="alert alert-success">{{ session("success") }}</div>
-            @endif
-        @foreach ($news as $new)
         <div class="card" style="width: 18rem;">
             <img height="300px" src="{{ asset("storage"."/".$new->image_url) }}" class="card-img-top" alt="...">
-            <div class="card-body">
               <h5 class="card-title">{{ $new->title }}</h5>
-              <a href="{{ route('news-show',["id" => $new->id]) }}" class="btn btn-primary">View Post</a>
+              <p class="card-text">{{ $new->body }}</p>
+              <a href="{{ route('news-edit',["id" => $new->id]) }}" class="btn btn-dark">Edit Post</a><a href="{{ route('news-destroy',["id" => $new->id]) }}" class="btn btn-danger">Delete Post</a>
             </div>
           </div>
-        @endforeach
     </div>
 </div>
 @endsection
