@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('news.index');
 // });
 
+
 Route::controller(NewsController::class)->group(function(){
     Route::get('/','index')->name("news-index");
     Route::get('/addNews',"create")->name(("news-create"));
@@ -26,4 +27,9 @@ Route::controller(NewsController::class)->group(function(){
     Route::get('/edit/{id}',"edit")->name(("news-edit"));
     Route::post('/update/{id}',"update")->name(("news-update"));
     Route::get('/destroy/{id}',"destroy")->name(("news-destroy"));
+    Route::get('/register','register')->name('news-register');
+    Route::post('/signup','signup')->name('news-signup');
+    Route::get('/login','login')->name('news-login');
+    Route::post('/signin','signin')->name('news-signin');
+    Route::get('/logout','logout')->name('news-logout');
 });

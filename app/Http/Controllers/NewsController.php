@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AuthUser;
 use App\Models\News;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class NewsController extends Controller
@@ -70,5 +73,39 @@ class NewsController extends Controller
         Storage::delete("public/".$new->image_url);
         $new->delete();
         return to_route('news-index')->with('delete',"Blog deleted successfully");
+    }
+
+    public function register(){
+        return view('auth.register');
+    }
+
+    public function signup(Request $request){
+        $user = new AuthUser();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = $request->password;
+        $user->save();
+        session()->put('user',$user->email);
+        return redirect('/');
+    }
+
+    public function login(){
+        return view('auth.login');
+    }
+
+    public function signin(Request $request){
+        $user = AuthUser::where("email", $request->email)->where("password", $request->password)->first();
+        if(isset($user->email)){
+            session()->put('user',$user->email);
+            return redirect('/')->with('login-success',"login Successfully");
+        }else{
+            return back()->with('login-error',"Email or Password is Incorrected");
+        }
+        
+    }
+
+    public function logout(){
+        session()->remove('user');
+        return redirect('/');
     }
 }

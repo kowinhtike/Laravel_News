@@ -24,6 +24,27 @@
               <li class="nav-item">
                 <a class="nav-link" href="{{ route("news-create") }}">Add News</a>
               </li>
+              
+
+              @if (session()->has('user'))
+              <li class="nav-item">
+                <li class="nav-item">
+                  <h4>{{ session('user')}}</h4>
+                </li>
+                <a class="nav-link" href="{{ route('news-logout') }}">LogOut</a>
+              </li>
+              @else
+              <li class="nav-item">
+                <a class="nav-link" href="{{ route('news-login') }}">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ route('news-register') }}">Register</a>
+              </li>
+              @endif
+
+
+
+              
     
             </ul>
           </div>

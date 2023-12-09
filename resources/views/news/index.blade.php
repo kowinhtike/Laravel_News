@@ -9,9 +9,9 @@
 @section('content')
 <div class="container">
     <div class="row">
-      {{-- @if (session()->has("success"))
-                <div class="alert alert-success">{{ session("success") }}</div>
-            @endif --}}
+      @if (session()->has("login-success"))
+                <div class="alert alert-success">{{ session("login-success") }}</div>
+            @endif
         @foreach ($news as $new)
         <div class="card" style="width: 18rem;">
             <img height="300px" src="{{ asset("storage"."/".$new->image_url) }}" class="card-img-top" alt="...">
