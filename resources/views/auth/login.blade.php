@@ -11,9 +11,9 @@
 <div class="container">
     <div class="row">
         <div class="col-8">
-            @if(session()->has('login-error')){
+            @if(session()->has('login-error'))
                 <p class="alert alert-danger">{{ session('login-error') }}</p>
-            }
+            
             @endif
             <h1>This is login form</h1>
             <form action="{{ route('news-signin') }}" method="post" >

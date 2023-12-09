@@ -80,13 +80,19 @@ class NewsController extends Controller
     }
 
     public function signup(Request $request){
-        $user = new AuthUser();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->save();
-        session()->put('user',$user->email);
-        return redirect('/');
+        $temp_user = AuthUser::where("email", $request->email)->first();
+        if(isset($temp_user->email)){
+            return back()->with('signup-error',"Email is already existed!");
+        }else{
+            $user = new AuthUser();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+            $user->save();
+            session()->put('user',$user->email);
+            return redirect('/');
+        }
+        
     }
 
     public function login(){
@@ -96,7 +102,7 @@ class NewsController extends Controller
     public function signin(Request $request){
         $user = AuthUser::where("email", $request->email)->first();
     
-        if(Hash::check($request->password, $user->password)){
+        if(isset($user->password) && Hash::check($request->password, $user->password)){
             session()->put('user',$user->email);
             return redirect('/')->with('login-success',"login Successfully");
         }else{

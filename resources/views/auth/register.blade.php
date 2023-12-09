@@ -11,6 +11,9 @@
 <div class="container">
     <div class="row">
         <div class="col-8">
+            @if(session()->has('signup-error'))
+                <p class="alert alert-danger">{{ session('signup-error') }}</p>
+            @endif
             <h1>This is Register form</h1>
             <form action="{{ route('news-signup') }}" method="post" >
                 @csrf
