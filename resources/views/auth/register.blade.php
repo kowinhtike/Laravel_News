@@ -36,9 +36,13 @@
                         <p class="text-danger">{{ $message }}</p>
                     @enderror
                   </div>  
-                <button type="submit" class="btn btn-dark">Login</button>
+                <button type="submit" class="btn btn-dark">Register</button>
             </form>
         </div>
+       
     </div>
+    <p class="text-dark mt-50">You have an account?</p>
+        <a class="btn btn-success w-200" href="{{ route('news-login') }}">To Login</a>
+
 </div>
 @endsection

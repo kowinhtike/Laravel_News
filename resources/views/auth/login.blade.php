@@ -36,6 +36,9 @@
                 <button type="submit" class="btn btn-dark">Login</button>
             </form>
         </div>
-    </div>
+        </div>
+    <p class="text-dark mt-50">You don't have any account?</p>
+        <a class="btn btn-success w-200" href="{{ route('news-register') }}">To Register</a>
+
 </div>
 @endsection
