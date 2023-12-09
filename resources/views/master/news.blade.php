@@ -27,6 +27,7 @@
               
 
               @if (session()->has('user'))
+              
               <li class="nav-item">
                 <li class="nav-item">
                   <h4>{{ session('user')}}</h4>

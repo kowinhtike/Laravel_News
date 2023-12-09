@@ -83,7 +83,7 @@ class NewsController extends Controller
         $user = new AuthUser();
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password = $request->password;
+        $user->password = Hash::make($request->password);
         $user->save();
         session()->put('user',$user->email);
         return redirect('/');
@@ -94,8 +94,9 @@ class NewsController extends Controller
     }
 
     public function signin(Request $request){
-        $user = AuthUser::where("email", $request->email)->where("password", $request->password)->first();
-        if(isset($user->email)){
+        $user = AuthUser::where("email", $request->email)->first();
+    
+        if(Hash::check($request->password, $user->password)){
             session()->put('user',$user->email);
             return redirect('/')->with('login-success',"login Successfully");
         }else{
