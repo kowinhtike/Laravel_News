@@ -13,7 +13,7 @@ class NewsController extends Controller
 {
     //
     public function index(){
-        $news = News::all();
+        $news = News::all()->where("user",session('user'));
         return view("news.index",["news" => $news]);
     }
 
@@ -29,6 +29,7 @@ class NewsController extends Controller
         $new = new News();
         $new->title = $request->title;
         $new->body = $request->body;
+        $new->user = session('user');
         $imagefile = $request->file('image');
         $getImageName = $imagefile->hashName();
         $imagefile->storeAs("public",$getImageName);

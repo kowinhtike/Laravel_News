@@ -7,22 +7,32 @@
 @endsection
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="card" style="width: 30rem;">
-            <img height="300px" src="{{ asset("storage"."/".$new->image_url) }}" class="card-img-top" alt="...">
-              <h5 class="card-title">{{ $new->title }}</h5>
-              <p class="card-text">{{ $new->body }}</p>
-              <div style="display: flex;justify-content:space-between">
-                <div>
-                  <a href="{{ route('news-edit',["id" => $new->id]) }}" class="btn btn-dark">Edit Post</a>
-                </div>
-                <div>
-                  <a href="{{ route('news-destroy',["id" => $new->id]) }}" class="btn btn-danger">Delete Post</a>
-                </div>
-              </div>
-            </div>
-          </div>
+
+<div class=" container-fluid bg-secondary p-3 ">
+  <div class="row">
+      <div class="col-sm-4   ">
+            
+            <a href="{{ route('news-show',["id" => $new->id]) }}" > <img width="100%" src="{{ asset("storage"."/".$new->image_url) }}"> </a>    
+        </div>
+        <div class="col-sm-8 bg-white p-3 ">
+            <h2>{{ $new->title }}</h2>
+          <p>
+            {{ $new->body }}
+          </p>
+        </div>
+  </div>
+  <div class="row p-2 bg-white">
+    <div class="col-sm-10">
+
     </div>
+    <div class="col-sm-1 text-left ">
+      <a href="{{ route('news-edit',["id" => $new->id]) }}" class="btn btn-dark">Edit</a>
+    </div>
+    <div class="col-sm-1 text-center ">
+      <a href="{{ route('news-destroy',["id" => $new->id]) }}" class="btn btn-danger">Delete</a>
+
+    </div>
+  </div>
 </div>
 @endsection
+

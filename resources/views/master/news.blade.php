@@ -24,8 +24,8 @@
               <li class="nav-item">
                 <a class="nav-link" href="{{ route("news-create") }}">Add News</a>
               </li>
-              
 
+              
               @if (session()->has('user'))
               
               <li class="nav-item">

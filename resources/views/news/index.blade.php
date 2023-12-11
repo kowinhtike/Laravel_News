@@ -7,20 +7,19 @@
 @endsection
 
 @section('content')
-<div class="container">
+<div class=" container-fluid bg-secondary p-3 ">
     <div class="row">
       @if (session()->has("login-success"))
                 <div class="alert alert-success">{{ session("login-success") }}</div>
-            @endif
-        @foreach ($news as $new)
-        <div class="card" style="width: 18rem;">
-            <img height="300px" src="{{ asset("storage"."/".$new->image_url) }}" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">{{ $new->title }}</h5>
-              <a href="{{ route('news-show',["id" => $new->id]) }}" class="btn btn-primary">View Post</a>
-            </div>
+      @endif
+      @foreach ($news as $new)
+        <div class="col-sm-4 bg-light mt-3 p-2 pb-5 d-flex flex-column align-items-center  ">
+              <div class="container-fluid">
+                <h2 class=" p-3 ">{{ $new->title }}</h2>
+              </div>
+              <a href="{{ route('news-show',["id" => $new->id]) }}" > <img width="100%" src="{{ asset("storage"."/".$new->image_url) }}"> </a>    
           </div>
-        @endforeach
+      @endforeach
     </div>
 </div>
 @endsection
