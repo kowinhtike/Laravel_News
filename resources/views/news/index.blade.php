@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-<div class=" container-fluid bg-secondary p-3 ">
+<div class=" container-fluid  p-3 ">
     <div class="row">
       @if (session()->has("login-success"))
                 <div class="alert alert-success">{{ session("login-success") }}</div>

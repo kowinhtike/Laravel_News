@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AuthUser;
 use App\Models\News;
 use App\Models\User;
+use App\Models\UserComments;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -40,7 +41,8 @@ class NewsController extends Controller
     }
     public function show($id){
         $new = News::find($id);
-        return view('news.show',['new' => $new]);
+        $comments = $new->comments;
+        return view('news.show',['new' => $new,'comments' => $comments]);
     }
 
     public function edit($id){
@@ -116,4 +118,26 @@ class NewsController extends Controller
         session()->remove('user');
         return redirect('/');
     }
+
+    public function allusers(){
+        $users = AuthUser::all();
+        return view('auth.allusers',['users' => $users]);
+    }
+
+    public function profile($email){
+        $news = News::all()->where("user",$email);
+        $user = AuthUser::where("email", $email)->first();
+        return view('auth.profile',['news' => $news,"user" => $user]);
+    }
+
+    public function comment(Request $request,$id,$name){
+        $new = News::find($id);
+        $comment = new UserComments();
+        $comment->text = $request->text;
+        $comment->name = $request->name;
+        $new->comments()->save($comment);
+        return back();
+    }
+
+
 }

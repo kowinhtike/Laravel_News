@@ -33,6 +33,36 @@
 
     </div>
   </div>
+  <div class="row">
+    <div class="col-sm-9">
+
+    </div>
+    <div class="col-sm-3">
+      @foreach ($comments as $comment)
+        <div class="card m-2 ">
+          <div class="card-header">
+            {{ $comment->name }}
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{ $comment->text }}</h5>
+  
+          </div>
+        </div>
+      @endforeach
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-9">
+
+    </div>
+    <div class="col-sm-3 p-3 ">
+      <form action="{{ route('news-comment',['id' => $new->id,'name' => session('user')]) }}" method="POST">
+        @csrf
+        <input class=" form-control " type="text" name="text">
+        <button class="btn btn-dark " type="submit">Send</button>
+      </form>
+    </div>
+  </div>
 </div>
 @endsection
 

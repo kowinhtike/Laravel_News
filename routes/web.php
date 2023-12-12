@@ -23,6 +23,9 @@ use Illuminate\Support\Facades\Route;
         Route::get('/edit/{id}',"edit")->name(("news-edit"))->middleware('checkSessionKey');
         Route::post('/update/{id}',"update")->name(("news-update"))->middleware('checkSessionKey');
         Route::get('/destroy/{id}',"destroy")->name(("news-destroy"))->middleware('checkSessionKey');
+        Route::get('/allusers',"allusers")->name('news-allusers')->middleware('checkSessionKey');
+        Route::get('/profile/{email}',"profile")->name('news-profile')->middleware('checkSessionKey');
+        Route::post('/comment/{id}/{name}',"comment")->name('news-comment')->middleware('checkSessionKey');
 
     });
 
